@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');
+require('dotenv').config();
 
 const app = express();
 
@@ -12,7 +13,7 @@ app.use(express.json());
 app.set('view engine', 'ejs');
 
 // database connection
-const dbURI = 'mongodb+srv://Hitesh:hskT123%40k@cluster.fldzn.mongodb.net/Node-Auth-JWT?retryWrites=true&w=majority';
+const dbURI = process.env.MONGO_URI;
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true })
   .then((result) => app.listen(3000))
   .catch((err) => console.log(err));
